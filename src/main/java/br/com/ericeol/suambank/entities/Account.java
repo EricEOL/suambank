@@ -1,5 +1,7 @@
 package br.com.ericeol.suambank.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Account {
 
     @Id
@@ -37,6 +40,7 @@ public class Account {
     private Client client;
 
     @OneToMany(mappedBy = "account")
+    @JsonIgnore
     private List<Loan> loans = new ArrayList<>();
 
     public Account(Bank bank, Client client, AccountType type) {

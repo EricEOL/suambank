@@ -21,7 +21,7 @@ public class BankController {
     }
 
     @PostMapping
-    public void createBank(@RequestBody FormBank form) {
+    public void newBank(@RequestBody FormBank form) {
         service.createBank(form);
     }
 
