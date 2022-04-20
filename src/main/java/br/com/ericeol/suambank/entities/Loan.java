@@ -1,15 +1,29 @@
 package br.com.ericeol.suambank.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.text.DecimalFormat;
 import java.util.GregorianCalendar;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class Loan {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private final Account account;
-    private final Double initialValue;
+    @ManyToOne
+    private Account account;
+
+    private Double initialValue;
     private Double currentValue;
-    private final Double valueInstallments;
-    private final int installments;
+    private Double valueInstallments;
+    private int installments;
     private int installmentsPaid;
     private GregorianCalendar nextPaymentDate;
 

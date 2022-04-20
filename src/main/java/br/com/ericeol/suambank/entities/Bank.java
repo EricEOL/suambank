@@ -1,16 +1,36 @@
 package br.com.ericeol.suambank.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class Bank {
 
-    private final String cod;
-    private final String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String cod;
+
+    @Column(nullable = false, unique = true)
+    private String name;
+
     private Double bankBalance = 10000000000000000d;
-    private Double accountsBalance = 0d;
-    private List<Account> accounts = new ArrayList();
-    private List<Loan> loans = new ArrayList();
+
+    @OneToMany(mappedBy = "bank", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Account> accounts = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Loan> loans = new ArrayList<>();
 
     public Bank(String cod, String name) {
         this.cod = cod;
@@ -19,14 +39,14 @@ public class Bank {
 
     public Account newCheckingAccount(Client client) {
         for (Account account : accounts) {
-            if (account.getClient().getCpf() == client.getCpf() && account.getClass() == CheckingAccount.class) {
+            if (account.getClient().getCpf() == client.getCpf() && account.getAccountType() == AccountType.CHECKING.toString()) {
                 throw new RuntimeException("Não é possível criar duas contas correntes para o mesmo cliente");
             }
         }
 
-        Account account = new CheckingAccount(this, client);
+        Account account = new Account(this, client, AccountType.CHECKING);
 
-        client.setCc((CheckingAccount) account);
+        client.addAccount(account);
 
         accounts.add(account);
 
@@ -36,14 +56,14 @@ public class Bank {
     public Account newSavingsAccount(Client client) {
 
         for (Account account : accounts) {
-            if (account.getClient().getCpf() == client.getCpf() && account.getClass() == SavingsAccount.class) {
+            if (account.getClient().getCpf() == client.getCpf() && account.getAccountType() == AccountType.SAVINGS.toString()) {
                 throw new RuntimeException("Não é possível criar duas contas poupança para o mesmo cliente");
             }
         }
 
-        Account account = new SavingsAccount(this, client);
+        Account account = new Account(this, client, AccountType.SAVINGS);
 
-        client.setCp((SavingsAccount) account);
+        client.addAccount(account);
 
         accounts.add(account);
 
@@ -81,7 +101,8 @@ public class Bank {
     }
 
     public Double getAccountsBalance() {
-        for(Account account: accounts) this.accountsBalance += account.getBalance();
+        Double accountsBalance = 0d;
+        for(Account account: accounts) accountsBalance += account.getBalance();
         return accountsBalance;
     }
 

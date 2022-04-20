@@ -1,10 +1,30 @@
 package br.com.ericeol.suambank.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class Client {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true)
     private String cpf;
+
     private String name;
-    private CheckingAccount checkingAccount;
-    private SavingsAccount savingsAccount;
+
+    @OneToMany(mappedBy = "client")
+    private List<Account> accounts = new ArrayList<>();
 
     public Client(String cpf, String name) {
         this.cpf = cpf;
@@ -27,19 +47,7 @@ public class Client {
         this.name = name;
     }
 
-    public CheckingAccount getcheckingAccount() {
-        return checkingAccount;
-    }
-
-    public void setCc(CheckingAccount checkingAccount) {
-        this.checkingAccount = checkingAccount;
-    }
-
-    public SavingsAccount getsavingsAccount() {
-        return savingsAccount;
-    }
-
-    public void setCp(SavingsAccount savingsAccount) {
-        this.savingsAccount = savingsAccount;
+    public void addAccount(Account account) {
+        this.accounts.add(account);
     }
 }

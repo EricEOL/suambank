@@ -1,38 +1,65 @@
 package br.com.ericeol.suambank.entities;
 
-public abstract class Account {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+public class Account {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @ManyToOne
     private Bank bank;
+
     private Double balance = 0d;
-    private String agencyNumber = "0001";
+
+    @Column(nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String agencyNumber;
+
+    @Column(nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String accountNumber;
+
+    private String accountType;
+
+    @ManyToOne
     private Client client;
 
-    public Account(Bank bank, Client client) {
-        int nextAccount = bank.getAccounts().size() + 1;
+    @OneToMany(mappedBy = "account")
+    private List<Loan> loans = new ArrayList<>();
 
-        this.id = nextAccount;
+    public Account(Bank bank, Client client, AccountType type) {
         this.bank = bank;
-        this.accountNumber =  "000" + nextAccount;
         this.client = client;
+        this.accountType = type.toString();
     }
 
-    protected String deposit(Double value) {
+    public String deposit(Double value) {
         if(value <= 0) return "Deposite um value válido";
 
         balance += value;
         return "DEPÓSITO no value de " + value + " realizado com sucesso";
     }
 
-    protected String withdraw(Double value) {
+    public String withdraw(Double value) {
         if(value > this.balance || value <= 0) throw new RuntimeException("Não é possível realizar o saque desse valor");
 
         balance -= value;
         return "SAQUE no value de " + value + " realizado com sucesso";
     }
 
-    protected String transfer(Account destinyAccount, Double value, TransfersType tipo ) {
+    public String transfer(Account destinyAccount, Double value, TransfersType tipo ) {
         double valueComTaxa = value;
 
         if(tipo.equals(TransfersType.TED)) valueComTaxa = value + 15d;
@@ -46,27 +73,31 @@ public abstract class Account {
         return "TRANSFERÊNCIA no value de " + value + " para a Conta de " + destinyAccount.getClient().getName() + " realizada com sucesso";
     }
 
-    protected int getId() {
+    public String getAccountType() {
+        return this.accountType;
+    }
+
+    public int getId() {
         return id;
     }
 
-    protected Bank getBank() {
+    public Bank getBank() {
         return bank;
     }
 
-    protected Double getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    protected String getAgencyNumber() {
+    public String getAgencyNumber() {
         return agencyNumber;
     }
 
-    protected String getAccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    protected Client getClient() {
+    public Client getClient() {
         return client;
     }
 }
