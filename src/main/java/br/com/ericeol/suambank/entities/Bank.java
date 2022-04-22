@@ -42,6 +42,7 @@ public class Bank {
         this.name = name;
     }
 
+    /*
     public Account newCheckingAccount(Client client) {
         for (Account account : accounts) {
             if (account.getClient().getCpf() == client.getCpf() && account.getAccountType() == AccountType.CHECKING.toString()) {
@@ -74,6 +75,7 @@ public class Bank {
 
         return account;
     }
+    */
 
     public Loan takeOutLoan(Account requestedAccount, Double requestedValue, int installments) {
         if (requestedValue > 30000d) throw new RuntimeException("Value solicitado excede o permitido");

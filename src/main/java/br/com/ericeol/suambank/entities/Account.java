@@ -27,12 +27,10 @@ public class Account {
     private Double balance = 0d;
 
     @Column(nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String agencyNumber;
+    private Long agencyNumber;
 
     @Column(nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String accountNumber;
+    private Long accountNumber;
 
     private String accountType;
 
@@ -43,10 +41,12 @@ public class Account {
     @JsonIgnore
     private List<Loan> loans = new ArrayList<>();
 
-    public Account(Bank bank, Client client, AccountType type) {
+    public Account(Bank bank, Client client, String accountType, Long agencyNumber, Long accountNumber) {
         this.bank = bank;
         this.client = client;
-        this.accountType = type.toString();
+        this.accountType = accountType;
+        this.agencyNumber = agencyNumber;
+        this.accountNumber = accountNumber;
     }
 
     public String deposit(Double value) {
@@ -93,11 +93,11 @@ public class Account {
         return balance;
     }
 
-    public String getAgencyNumber() {
+    public Long getAgencyNumber() {
         return agencyNumber;
     }
 
-    public String getAccountNumber() {
+    public Long getAccountNumber() {
         return accountNumber;
     }
 
