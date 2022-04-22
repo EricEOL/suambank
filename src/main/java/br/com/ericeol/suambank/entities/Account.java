@@ -1,5 +1,6 @@
 package br.com.ericeol.suambank.entities;
 
+import br.com.ericeol.suambank.entities.bank.Bank;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @ManyToOne
     private Bank bank;
@@ -81,7 +82,7 @@ public class Account {
         return this.accountType;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

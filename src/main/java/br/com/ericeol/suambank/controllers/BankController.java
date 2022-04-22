@@ -1,6 +1,6 @@
 package br.com.ericeol.suambank.controllers;
 
-import br.com.ericeol.suambank.entities.Bank;
+import br.com.ericeol.suambank.entities.bank.Bank;
 import br.com.ericeol.suambank.entities.forms.FormBank;
 import br.com.ericeol.suambank.services.BankService;
 import org.springframework.beans.factory.annotation.Autowired;

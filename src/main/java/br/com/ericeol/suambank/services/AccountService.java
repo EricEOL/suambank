@@ -2,7 +2,7 @@ package br.com.ericeol.suambank.services;
 
 import br.com.ericeol.suambank.entities.Account;
 import br.com.ericeol.suambank.entities.AccountType;
-import br.com.ericeol.suambank.entities.Bank;
+import br.com.ericeol.suambank.entities.bank.Bank;
 import br.com.ericeol.suambank.entities.Client;
 import br.com.ericeol.suambank.repositories.AccountRepository;
 import br.com.ericeol.suambank.repositories.BankRepository;

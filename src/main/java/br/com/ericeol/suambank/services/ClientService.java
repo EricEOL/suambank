@@ -1,6 +1,7 @@
 package br.com.ericeol.suambank.services;
 
 import br.com.ericeol.suambank.entities.Client;
+import br.com.ericeol.suambank.entities.dto.ClientDTO;
 import br.com.ericeol.suambank.entities.forms.FormClient;
 import br.com.ericeol.suambank.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,9 @@ public class ClientService {
     @Autowired
     ClientRepository repository;
 
-    public List<Client> all() {
-        return repository.findAll();
+    public List<ClientDTO> all() {
+        List<Client> clients = repository.findAll();
+        return ClientDTO.convert(clients);
     }
 
     public void createClient(FormClient form) {
