@@ -45,4 +45,12 @@ public class AccountTest {
         });
     }
 
+    @Test
+    @Transactional
+    void shouldNotBePossibleCreateTwoSavingsAccountsForTheSameClient() {
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            accountController.newSavingsAccount(1L);
+        });
+    }
+
 }

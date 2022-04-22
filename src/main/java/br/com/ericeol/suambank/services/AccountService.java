@@ -53,6 +53,12 @@ public class AccountService {
             Bank bank = bankRepository.findById(1L).get();
             Client client = clientRepository.findById(clientId).get();
 
+            Boolean clientAlreadyHasSavingsAccount = client.clientAlreadyHasSavingsAccount();
+
+            if(clientAlreadyHasSavingsAccount) {
+                throw new CreateNewAccountException("Esse cliente já possui uma savings account");
+            }
+
             Long agencyNumber = Math.round((repository.count() + 1) * Math.random() * 1001);
             Long accountNumber = Math.round((repository.count() + 2) * Math.random() * 1003);
 

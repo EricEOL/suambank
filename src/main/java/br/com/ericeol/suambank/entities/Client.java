@@ -47,6 +47,15 @@ public class Client {
         return result.size() >= 1;
     }
 
+    public Boolean clientAlreadyHasSavingsAccount() {
+        List<Account> result = this.accounts
+                .stream()
+                .filter(account -> account.getAccountType().length() == AccountType.SAVINGS.toString().length())
+                .collect(Collectors.toList());
+
+        return result.size() >= 1;
+    }
+
     public String getCpf() {
         return cpf;
     }
