@@ -38,12 +38,13 @@ public class Client {
         this.name = name;
     }
 
-    public void clientAlreadyHasCheckingAccount() {
+    public Boolean clientAlreadyHasCheckingAccount() {
         List<Account> result = this.accounts
                 .stream()
-                .filter(account -> account.getAccountType() == AccountType.CHECKING.toString())
+                .filter(account -> account.getAccountType().length() == AccountType.CHECKING.toString().length())
                 .collect(Collectors.toList());
-        System.out.println(result);
+
+        return result.size() >= 1;
     }
 
     public String getCpf() {
