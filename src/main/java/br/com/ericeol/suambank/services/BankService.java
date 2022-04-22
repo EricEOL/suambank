@@ -1,7 +1,7 @@
 package br.com.ericeol.suambank.services;
 
-import br.com.ericeol.suambank.entities.bank.Bank;
-import br.com.ericeol.suambank.entities.bank.CreateNewBankException;
+import br.com.ericeol.suambank.entities.Bank.Bank;
+import br.com.ericeol.suambank.entities.Bank.CreateNewBankException;
 import br.com.ericeol.suambank.entities.forms.FormBank;
 import br.com.ericeol.suambank.repositories.BankRepository;
 import org.springframework.beans.factory.annotation.Autowired;

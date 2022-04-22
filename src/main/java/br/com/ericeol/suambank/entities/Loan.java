@@ -1,5 +1,6 @@
 package br.com.ericeol.suambank.entities;
 
+import br.com.ericeol.suambank.entities.Account.Account;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

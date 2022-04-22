@@ -1,5 +1,7 @@
 package br.com.ericeol.suambank.entities;
 
+import br.com.ericeol.suambank.entities.Account.Account;
+import br.com.ericeol.suambank.entities.Account.AccountType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -9,6 +11,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -35,6 +38,14 @@ public class Client {
         this.name = name;
     }
 
+    public void clientAlreadyHasCheckingAccount() {
+        List<Account> result = this.accounts
+                .stream()
+                .filter(account -> account.getAccountType() == AccountType.CHECKING.toString())
+                .collect(Collectors.toList());
+        System.out.println(result);
+    }
+
     public String getCpf() {
         return cpf;
     }
@@ -51,7 +62,4 @@ public class Client {
         this.name = name;
     }
 
-    public void addAccount(Account account) {
-        this.accounts.add(account);
-    }
 }

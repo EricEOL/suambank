@@ -26,4 +26,13 @@ public class ClientService {
         repository.save(client);
     }
 
+    public ClientDTO one(Long id) {
+        try {
+            Client client = repository.findById(id).get();
+            return new ClientDTO(client);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Não existe cliente com esse id");
+        }
+    }
 }

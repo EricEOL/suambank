@@ -1,7 +1,7 @@
 package br.com.ericeol.suambank.entities.dto;
 
 
-import br.com.ericeol.suambank.entities.Account;
+import br.com.ericeol.suambank.entities.Account.Account;
 import lombok.Data;
 
 import java.util.List;

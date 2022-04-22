@@ -1,8 +1,8 @@
 package br.com.ericeol.suambank.services;
 
-import br.com.ericeol.suambank.entities.Account;
-import br.com.ericeol.suambank.entities.AccountType;
-import br.com.ericeol.suambank.entities.bank.Bank;
+import br.com.ericeol.suambank.entities.Account.Account;
+import br.com.ericeol.suambank.entities.Account.AccountType;
+import br.com.ericeol.suambank.entities.Bank.Bank;
 import br.com.ericeol.suambank.entities.Client;
 import br.com.ericeol.suambank.repositories.AccountRepository;
 import br.com.ericeol.suambank.repositories.BankRepository;
@@ -30,6 +30,8 @@ public class AccountService {
         try {
             Bank bank = bankRepository.findById(1L).get();
             Client client = clientRepository.findById(clientId).get();
+
+            //Boolean clientAlreadyHasCheckingAccount = client.getAccounts()
 
             Long agencyNumber = Math.round((repository.count() + 1) * Math.random() * 1000);
             Long accountNumber = Math.round((repository.count() + 2) * Math.random() * 1007);

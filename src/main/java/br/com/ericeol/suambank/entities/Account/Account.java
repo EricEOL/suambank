@@ -1,6 +1,9 @@
-package br.com.ericeol.suambank.entities;
+package br.com.ericeol.suambank.entities.Account;
 
-import br.com.ericeol.suambank.entities.bank.Bank;
+import br.com.ericeol.suambank.entities.Bank.Bank;
+import br.com.ericeol.suambank.entities.Client;
+import br.com.ericeol.suambank.entities.Loan;
+import br.com.ericeol.suambank.entities.TransfersType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

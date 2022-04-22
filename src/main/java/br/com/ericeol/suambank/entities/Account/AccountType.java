@@ -1,4 +1,4 @@
-package br.com.ericeol.suambank.entities;
+package br.com.ericeol.suambank.entities.Account;
 
 public enum AccountType {
     CHECKING,

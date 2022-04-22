@@ -1,7 +1,7 @@
 package br.com.ericeol.suambank;
 
 import br.com.ericeol.suambank.controllers.BankController;
-import br.com.ericeol.suambank.entities.bank.CreateNewBankException;
+import br.com.ericeol.suambank.entities.Bank.CreateNewBankException;
 import br.com.ericeol.suambank.entities.forms.FormBank;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

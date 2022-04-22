@@ -1,6 +1,6 @@
-package br.com.ericeol.suambank.entities.bank;
+package br.com.ericeol.suambank.entities.Bank;
 
-import br.com.ericeol.suambank.entities.Account;
+import br.com.ericeol.suambank.entities.Account.Account;
 import br.com.ericeol.suambank.entities.Loan;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

@@ -21,6 +21,11 @@ public class ClientController {
         return service.all();
     }
 
+    @GetMapping("/{id}")
+    public ClientDTO one(@PathVariable Long id) {
+        return service.one(id);
+    }
+
     @PostMapping
     public void newClient(@RequestBody FormClient form) {
         service.createClient(form);
