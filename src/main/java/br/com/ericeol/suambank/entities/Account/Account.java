@@ -1,9 +1,7 @@
 package br.com.ericeol.suambank.entities.Account;
 
+import br.com.ericeol.suambank.entities.*;
 import br.com.ericeol.suambank.entities.Bank.Bank;
-import br.com.ericeol.suambank.entities.Client;
-import br.com.ericeol.suambank.entities.Loan;
-import br.com.ericeol.suambank.entities.TransfersType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -41,6 +39,9 @@ public class Account {
     @ManyToOne
     private Client client;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+    private List<Transaction> statement = new ArrayList<>();
+
     @OneToMany(mappedBy = "account")
     @JsonIgnore
     private List<Loan> loans = new ArrayList<>();
@@ -68,12 +69,14 @@ public class Account {
     }
 
     public Boolean transfer(Account destinyAccount, Double value, TransfersType transfersType ) {
+        if(this.id == destinyAccount.getId()) throw new RuntimeException("Você não pode transferir valores para a mesma conta que está utilizando");
+
         double valueWithFee = value;
 
         if(transfersType.equals(TransfersType.TED)) valueWithFee = value + 15d;
         if(transfersType.equals(TransfersType.DOC)) valueWithFee = value + 10d;
 
-        if(valueWithFee > this.balance || value <= 0) throw new RuntimeException("Não é possível realizar uma transferência com esse value");
+        if(valueWithFee > this.balance || value <= 0) throw new RuntimeException("Não é possível realizar uma transferência com esse valor");
 
         this.withdraw(valueWithFee);
         destinyAccount.deposit(value);

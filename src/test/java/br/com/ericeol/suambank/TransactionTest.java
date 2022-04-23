@@ -3,6 +3,7 @@ package br.com.ericeol.suambank;
 import br.com.ericeol.suambank.controllers.TransactionController;
 import br.com.ericeol.suambank.entities.forms.DepositTransactionForm;
 import br.com.ericeol.suambank.entities.forms.TransferTransactionForm;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -58,6 +59,18 @@ public class TransactionTest {
                 "DOC"
         );
         System.out.println(controller.transfer(transferTransactionForm));
+    }
+
+    @Test
+    void shouldNotBePossibleTransferValueWhenTheSenderAccountIsEqualsToDestinationAccount() {
+        TransferTransactionForm transferTransactionForm = new TransferTransactionForm(
+                1L,
+                829L,
+                991L,
+                2000d,
+                "PIX"
+        );
+        Assertions.assertThrows(RuntimeException.class, () -> controller.transfer(transferTransactionForm));
     }
 
 }
