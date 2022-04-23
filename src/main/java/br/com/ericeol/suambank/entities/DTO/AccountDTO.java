@@ -1,4 +1,4 @@
-package br.com.ericeol.suambank.entities.dto;
+package br.com.ericeol.suambank.entities.DTO;
 
 
 import br.com.ericeol.suambank.entities.Account.Account;

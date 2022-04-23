@@ -1,6 +1,8 @@
 package br.com.ericeol.suambank.services;
 
 import br.com.ericeol.suambank.entities.Account.Account;
+import br.com.ericeol.suambank.entities.DTO.TransactionDTO;
+import br.com.ericeol.suambank.entities.TransactionsType;
 import br.com.ericeol.suambank.entities.forms.DepositTransactionForm;
 import br.com.ericeol.suambank.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +16,32 @@ public class TransactionService {
     AccountRepository repository;
 
     @Transactional
-    public String deposit(DepositTransactionForm depositTransactionForm) {
+    public TransactionDTO deposit(DepositTransactionForm depositTransactionForm) {
         try {
             Account account = repository.findByAgencyAndAccountNumber(depositTransactionForm.getAgencyNumber(), depositTransactionForm.getAccountNumber());
-            return account.deposit(depositTransactionForm.getValue());
 
+            account.deposit(depositTransactionForm.getValue());
+
+            return new TransactionDTO(
+                    depositTransactionForm.getAgencyNumber(),
+                    depositTransactionForm.getAccountNumber(),
+                    depositTransactionForm.getValue(),
+                    TransactionsType.DEPOSIT,
+                    "sucess"
+            );
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Transactional
+    public TransactionDTO withdraw(Long accountId, Double value) {
+        try {
+            Account account = repository.findById(accountId).get();
+            account.withdraw(value);
+
+            return new TransactionDTO(account, value, TransactionsType.WITHDRAW, "success");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

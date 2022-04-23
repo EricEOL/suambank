@@ -1,12 +1,11 @@
 package br.com.ericeol.suambank.services;
 
 import br.com.ericeol.suambank.entities.Client;
-import br.com.ericeol.suambank.entities.dto.ClientDTO;
+import br.com.ericeol.suambank.entities.DTO.ClientDTO;
 import br.com.ericeol.suambank.entities.forms.FormClient;
 import br.com.ericeol.suambank.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

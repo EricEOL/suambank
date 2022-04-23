@@ -53,18 +53,18 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public String deposit(Double value) {
-        if(value <= 0) return "Deposite um value válido";
+    public Boolean deposit(Double value) {
+        if(value <= 0) throw new RuntimeException("Deposite um valor válido");
 
         balance += value;
-        return "DEPÓSITO no value de " + value + " realizado com sucesso";
+        return true;
     }
 
-    public String withdraw(Double value) {
+    public Boolean withdraw(Double value) {
         if(value > this.balance || value <= 0) throw new RuntimeException("Não é possível realizar o saque desse valor");
 
         balance -= value;
-        return "SAQUE no value de " + value + " realizado com sucesso";
+        return true;
     }
 
     public String transfer(Account destinyAccount, Double value, TransfersType tipo ) {
