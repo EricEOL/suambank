@@ -2,6 +2,7 @@ package br.com.ericeol.suambank;
 
 import br.com.ericeol.suambank.controllers.TransactionController;
 import br.com.ericeol.suambank.entities.forms.DepositTransactionForm;
+import br.com.ericeol.suambank.entities.forms.TransferTransactionForm;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,42 @@ public class TransactionTest {
     @Test
     void shouldBeWithdrawValueFromAccountBalance() {
         System.out.println(controller.withdraw(1L, 290d));
+    }
+
+    @Test
+    void shouldBeTransferValueFromSenderAccountToDestinationAccountUsingTransfersTypePIX() {
+        TransferTransactionForm transferTransactionForm = new TransferTransactionForm(
+                1L,
+                1573L,
+                2043L,
+                2000d,
+                "PIX"
+        );
+        System.out.println(controller.transfer(transferTransactionForm));
+    }
+
+    @Test
+    void shouldBeTransferValueFromSenderAccountToDestinationAccountUsingTransfersTypeTED() {
+        TransferTransactionForm transferTransactionForm = new TransferTransactionForm(
+                2L,
+                829L,
+                991L,
+                1000d,
+                "TED"
+        );
+        System.out.println(controller.transfer(transferTransactionForm));
+    }
+
+    @Test
+    void shouldBeTransferValueFromSenderAccountToDestinationAccountUsingTransfersTypeDOC() {
+        TransferTransactionForm transferTransactionForm = new TransferTransactionForm(
+                2L,
+                829L,
+                991L,
+                1000d,
+                "DOC"
+        );
+        System.out.println(controller.transfer(transferTransactionForm));
     }
 
 }

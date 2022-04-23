@@ -67,18 +67,18 @@ public class Account {
         return true;
     }
 
-    public String transfer(Account destinyAccount, Double value, TransfersType tipo ) {
-        double valueComTaxa = value;
+    public Boolean transfer(Account destinyAccount, Double value, TransfersType transfersType ) {
+        double valueWithFee = value;
 
-        if(tipo.equals(TransfersType.TED)) valueComTaxa = value + 15d;
-        if(tipo.equals(TransfersType.DOC)) valueComTaxa = value + 10d;
+        if(transfersType.equals(TransfersType.TED)) valueWithFee = value + 15d;
+        if(transfersType.equals(TransfersType.DOC)) valueWithFee = value + 10d;
 
-        if(valueComTaxa > this.balance || value <= 0) return "Não é possível realizar uma transferência com esse value";
+        if(valueWithFee > this.balance || value <= 0) throw new RuntimeException("Não é possível realizar uma transferência com esse value");
 
-        this.withdraw(valueComTaxa);
+        this.withdraw(valueWithFee);
         destinyAccount.deposit(value);
 
-        return "TRANSFERÊNCIA no value de " + value + " para a Conta de " + destinyAccount.getClient().getName() + " realizada com sucesso";
+        return true;
     }
 
     public String getAccountType() {

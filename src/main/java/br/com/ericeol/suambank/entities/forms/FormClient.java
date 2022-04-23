@@ -13,7 +13,6 @@ import javax.validation.constraints.NotBlank;
 public class FormClient {
 
     @NotBlank(message = "campo CPF é obrigatório")
-    //@CPF(message = "formato de cpf do Brasil. Ex: 111.111.111-01")
     private String cpf;
 
     private String name;
