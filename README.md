@@ -11,6 +11,7 @@ Tecnologias utilizadas nesse projeto:
 
 * Java
 * Spring Boot
+* Lombok
 * JUnit5
 * Maven
 
