@@ -38,13 +38,7 @@ public class TransactionService {
 
             transactionRepository.save(transaction);
 
-            return new TransactionDTO(
-                    depositTransactionForm.getAgencyNumber(),
-                    depositTransactionForm.getAccountNumber(),
-                    depositTransactionForm.getValue(),
-                    TransactionsType.DEPOSIT,
-                    "sucess"
-            );
+            return new TransactionDTO(transaction);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -67,7 +61,7 @@ public class TransactionService {
 
             transactionRepository.save(transaction);
 
-            return new TransactionDTO(account, value, TransactionsType.WITHDRAW, "success");
+            return new TransactionDTO(transaction);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -91,13 +85,7 @@ public class TransactionService {
 
             transactionRepository.save(transaction);
 
-            return new TransactionDTO(
-                    transferTransactionForm.getDestinationAgencyNumber(),
-                    transferTransactionForm.getDestinationAccountNumber(),
-                    transferTransactionForm.getValue(),
-                    TransactionsType.TRANSFER,
-                    "success"
-            );
+            return new TransactionDTO(transaction);
 
         } catch (Exception e) {
             throw new RuntimeException(e);

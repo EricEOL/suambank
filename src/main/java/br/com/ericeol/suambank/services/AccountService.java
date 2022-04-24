@@ -5,6 +5,8 @@ import br.com.ericeol.suambank.entities.Account.AccountType;
 import br.com.ericeol.suambank.entities.Account.CreateNewAccountException;
 import br.com.ericeol.suambank.entities.Bank.Bank;
 import br.com.ericeol.suambank.entities.Client;
+import br.com.ericeol.suambank.entities.DTO.TransactionDTO;
+import br.com.ericeol.suambank.entities.Transaction;
 import br.com.ericeol.suambank.repositories.AccountRepository;
 import br.com.ericeol.suambank.repositories.BankRepository;
 import br.com.ericeol.suambank.repositories.ClientRepository;
@@ -12,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountService {
@@ -67,5 +71,22 @@ public class AccountService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<TransactionDTO> statement(Long accountId, int month, int year) {
+        Optional<Account> account = repository.findById(accountId);
+
+        if(account.isEmpty()) {
+            throw new RuntimeException("Não existe conta com esse id");
+        }
+
+        List<Transaction> transactions = account.get().getStatement().stream().filter(transaction -> {
+            int transactionMonth = transaction.getCreatedAt().getMonth() + 1;
+            int transactionYear = transaction.getCreatedAt().getYear() + 1900;
+
+            return transactionMonth == month && transactionYear == year;
+        }).collect(Collectors.toList());
+
+        return TransactionDTO.convert(transactions);
     }
 }
