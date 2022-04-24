@@ -53,4 +53,10 @@ public class AccountTest {
         });
     }
 
+    @Test
+    @Transactional
+    void shouldBeReturnAccountStatement() {
+        System.out.println(accountController.statementByMonth(2L, 4, 2022));
+    }
+
 }
