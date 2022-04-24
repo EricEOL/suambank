@@ -28,7 +28,7 @@ public class Account {
 
     private Double balance = 0d;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Long agencyNumber;
 
     @Column(nullable = false, unique = true)

@@ -1,11 +1,7 @@
 package br.com.ericeol.suambank;
 
 import br.com.ericeol.suambank.controllers.AccountController;
-import br.com.ericeol.suambank.controllers.ClientController;
-import br.com.ericeol.suambank.entities.Account.AccountType;
-import br.com.ericeol.suambank.entities.Account.CreateNewAccountException;
-import br.com.ericeol.suambank.entities.Client;
-import br.com.ericeol.suambank.repositories.ClientRepository;
+import br.com.ericeol.suambank.entities.forms.FormAccount;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +14,6 @@ public class AccountTest {
     @Autowired
     AccountController accountController;
 
-    @Autowired
-    ClientRepository clientRepository;
-
     @Test
     @Transactional
     void shouldReturnAllAccounts() {
@@ -28,20 +21,22 @@ public class AccountTest {
     }
 
     @Test
+    @Transactional
     void createNewCheckingAccount() {
-        accountController.newCheckingAccount(1L);
+        accountController.newCheckingAccount(new FormAccount(3L));
     }
 
     @Test
+    @Transactional
     void createNewSavingsAccount() {
-        accountController.newSavingsAccount(1L);
+        accountController.newSavingsAccount(new FormAccount(1L));
     }
 
     @Test
     @Transactional
     void shouldNotBePossibleCreateTwoCheckingAccountsForTheSameClient() {
         Assertions.assertThrows(RuntimeException.class, () -> {
-            accountController.newCheckingAccount(1L);
+            accountController.newCheckingAccount(new FormAccount(1L));
         });
     }
 
@@ -49,7 +44,7 @@ public class AccountTest {
     @Transactional
     void shouldNotBePossibleCreateTwoSavingsAccountsForTheSameClient() {
         Assertions.assertThrows(RuntimeException.class, () -> {
-            accountController.newSavingsAccount(1L);
+            accountController.newSavingsAccount(new FormAccount(1L));
         });
     }
 

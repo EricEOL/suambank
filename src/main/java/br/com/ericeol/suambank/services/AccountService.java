@@ -7,11 +7,14 @@ import br.com.ericeol.suambank.entities.Bank.Bank;
 import br.com.ericeol.suambank.entities.Client;
 import br.com.ericeol.suambank.entities.DTO.TransactionDTO;
 import br.com.ericeol.suambank.entities.Transaction;
+import br.com.ericeol.suambank.entities.forms.FormAccount;
 import br.com.ericeol.suambank.repositories.AccountRepository;
 import br.com.ericeol.suambank.repositories.BankRepository;
 import br.com.ericeol.suambank.repositories.ClientRepository;
+import br.com.ericeol.suambank.utils.GenerateAgencyNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,10 +34,11 @@ public class AccountService {
         return repository.findAll();
     }
 
-    public void createCheckingAccount(Long clientId) {
+    @Transactional
+    public void createCheckingAccount(FormAccount formAccount) {
         try {
             Bank bank = bankRepository.findById(1L).get();
-            Client client = clientRepository.findById(clientId).get();
+            Client client = clientRepository.findById(formAccount.getClientId()).get();
 
             Boolean clientAlreadyHasCheckingAccount = client.clientAlreadyHasCheckingAccount();
 
@@ -42,7 +46,7 @@ public class AccountService {
                 throw new CreateNewAccountException("Esse cliente já possui uma checking account");
             }
 
-            Long agencyNumber = Math.round((repository.count() + 1) * Math.random() * 1000);
+            Long agencyNumber = GenerateAgencyNumber.generate(repository);
             Long accountNumber = Math.round((repository.count() + 2) * Math.random() * 1007);
 
             Account account = new Account(bank, client , AccountType.CHECKING.toString(), agencyNumber, accountNumber);
@@ -52,10 +56,11 @@ public class AccountService {
         }
     }
 
-    public void createSavingsAccount(Long clientId) {
+    @Transactional
+    public void createSavingsAccount(FormAccount formAccount) {
         try {
             Bank bank = bankRepository.findById(1L).get();
-            Client client = clientRepository.findById(clientId).get();
+            Client client = clientRepository.findById(formAccount.getClientId()).get();
 
             Boolean clientAlreadyHasSavingsAccount = client.clientAlreadyHasSavingsAccount();
 
@@ -63,7 +68,7 @@ public class AccountService {
                 throw new CreateNewAccountException("Esse cliente já possui uma savings account");
             }
 
-            Long agencyNumber = Math.round((repository.count() + 1) * Math.random() * 1001);
+            Long agencyNumber = GenerateAgencyNumber.generate(repository);
             Long accountNumber = Math.round((repository.count() + 2) * Math.random() * 1003);
 
             Account account = new Account(bank, client , AccountType.SAVINGS.toString(), agencyNumber, accountNumber);

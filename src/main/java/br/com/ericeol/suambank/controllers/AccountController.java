@@ -3,6 +3,7 @@ package br.com.ericeol.suambank.controllers;
 import br.com.ericeol.suambank.entities.Account.Account;
 import br.com.ericeol.suambank.entities.DTO.TransactionDTO;
 import br.com.ericeol.suambank.entities.Transaction;
+import br.com.ericeol.suambank.entities.forms.FormAccount;
 import br.com.ericeol.suambank.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,13 +32,13 @@ public class AccountController {
     }
 
     @PostMapping("/checkingAccount")
-    public void newCheckingAccount(@RequestBody Long clientId) {
-        service.createCheckingAccount(clientId);
+    public void newCheckingAccount(@RequestBody FormAccount formAccount) {
+        service.createCheckingAccount(formAccount);
     }
 
     @PostMapping("/savingsAccount")
-    public void newSavingsAccount(@RequestBody Long clientId) {
-        service.createSavingsAccount(clientId);
+    public void newSavingsAccount(@RequestBody FormAccount formAccount) {
+        service.createSavingsAccount(formAccount);
     }
 
 }
