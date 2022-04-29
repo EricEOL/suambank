@@ -15,5 +15,9 @@ public class FormClient {
     @NotBlank(message = "campo CPF é obrigatório")
     private String cpf;
 
+    @NotBlank(message = "campo NAME é obrigatório")
     private String name;
+
+    @NotBlank(message = "campo PASSWORD é obrigatório")
+    private String password;
 }
