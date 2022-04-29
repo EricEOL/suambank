@@ -1,6 +1,7 @@
 package br.com.ericeol.suambank.controllers;
 
 import br.com.ericeol.suambank.entities.Account.Account;
+import br.com.ericeol.suambank.entities.DTO.AccountDTO;
 import br.com.ericeol.suambank.entities.DTO.TransactionDTO;
 import br.com.ericeol.suambank.entities.Transaction;
 import br.com.ericeol.suambank.entities.forms.FormAccount;
@@ -18,7 +19,7 @@ public class AccountController {
     AccountService service;
 
     @GetMapping
-    public List<Account> all() {
+    public List<AccountDTO> all() {
         return service.all();
     }
 

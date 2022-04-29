@@ -5,6 +5,7 @@ import br.com.ericeol.suambank.entities.Account.AccountType;
 import br.com.ericeol.suambank.entities.Account.CreateNewAccountException;
 import br.com.ericeol.suambank.entities.Bank.Bank;
 import br.com.ericeol.suambank.entities.Client;
+import br.com.ericeol.suambank.entities.DTO.AccountDTO;
 import br.com.ericeol.suambank.entities.DTO.TransactionDTO;
 import br.com.ericeol.suambank.entities.Transaction;
 import br.com.ericeol.suambank.entities.forms.FormAccount;
@@ -30,8 +31,8 @@ public class AccountService {
     @Autowired
     ClientRepository clientRepository;
 
-    public List<Account> all() {
-        return repository.findAll();
+    public List<AccountDTO> all() {
+        return AccountDTO.convert(repository.findAll());
     }
 
     @Transactional
