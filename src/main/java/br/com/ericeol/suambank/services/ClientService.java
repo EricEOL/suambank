@@ -5,6 +5,8 @@ import br.com.ericeol.suambank.entities.DTO.ClientDTO;
 import br.com.ericeol.suambank.entities.forms.FormClient;
 import br.com.ericeol.suambank.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +23,7 @@ public class ClientService {
     }
 
     public void createClient(FormClient form) {
-        Client client = new Client(form.getCpf(), form.getName());
+        Client client = new Client(form.getCpf(), form.getName(), new BCryptPasswordEncoder().encode(form.getPassword()));
         repository.save(client);
     }
 

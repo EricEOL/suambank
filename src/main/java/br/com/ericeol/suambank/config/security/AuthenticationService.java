@@ -1,4 +1,4 @@
-package br.com.ericeol.suambank.services;
+package br.com.ericeol.suambank.config.security;
 
 import br.com.ericeol.suambank.entities.Client;
 import br.com.ericeol.suambank.repositories.ClientRepository;
@@ -17,9 +17,9 @@ public class AuthenticationService implements UserDetailsService {
     ClientRepository clientRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String cpf) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Optional<Client> client = clientRepository.findByCpf(cpf);
+        Optional<Client> client = clientRepository.findByCpf(username);
 
         if(client.isPresent()) {
             return client.get();

@@ -1,4 +1,4 @@
-package br.com.ericeol.suambank.services;
+package br.com.ericeol.suambank.config.security;
 
 import br.com.ericeol.suambank.entities.Client;
 import io.jsonwebtoken.Claims;
@@ -37,7 +37,7 @@ public class TokenService {
 
     public Boolean isTokenValid(String token) {
         try {
-            Jwts.parser().setSigningKey(this.secret).parseClaimsJwt(token);
+            Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
             return true;
         } catch (Exception e) {
             System.out.println("Exception na validação do Token: " + e);

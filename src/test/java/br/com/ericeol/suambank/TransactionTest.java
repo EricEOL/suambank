@@ -16,7 +16,7 @@ public class TransactionTest {
 
     @Test
     void shouldBeDepositValueInAccountBalance() {
-        DepositTransactionForm depositTransactionForm = new DepositTransactionForm(1573L, 2043L, 3000d);
+        DepositTransactionForm depositTransactionForm = new DepositTransactionForm(1000L, 1299L, 3000d);
         System.out.println(controller.deposit(depositTransactionForm));
     }
 

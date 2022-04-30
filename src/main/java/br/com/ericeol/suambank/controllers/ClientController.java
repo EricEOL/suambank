@@ -6,6 +6,7 @@ import br.com.ericeol.suambank.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,7 +27,7 @@ public class ClientController {
     }
 
     @PostMapping
-    public void newClient(@RequestBody FormClient form) {
+    public void newClient(@RequestBody @Valid FormClient form) {
         service.createClient(form);
     }
 

@@ -23,6 +23,8 @@ import java.util.stream.Collectors;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Client implements UserDetails {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,9 +40,13 @@ public class Client implements UserDetails {
     @JsonIgnore
     private List<Account> accounts = new ArrayList<>();
 
-    public Client(String cpf, String name) {
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles = new ArrayList<>();
+
+    public Client(String cpf, String name, String password) {
         this.cpf = cpf;
         this.name = name;
+        this.password = password;
     }
 
     public Boolean clientAlreadyHasCheckingAccount() {
@@ -79,7 +85,7 @@ public class Client implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.roles;
     }
 
     @Override

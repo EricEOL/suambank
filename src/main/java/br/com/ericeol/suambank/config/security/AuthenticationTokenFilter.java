@@ -2,7 +2,6 @@ package br.com.ericeol.suambank.config.security;
 
 import br.com.ericeol.suambank.entities.Client;
 import br.com.ericeol.suambank.repositories.ClientRepository;
-import br.com.ericeol.suambank.services.TokenService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -28,9 +27,11 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
 
         String token = this.getToken(request);
 
-        Boolean isTokenValid = tokenService.isTokenValid(token);
+        boolean isTokenValid = tokenService.isTokenValid(token);
 
-        if(isTokenValid) this.authenticateUser(token);
+        if(isTokenValid) {
+            this.authenticateUser(token);
+        }
 
         filterChain.doFilter(request, response);
     }
