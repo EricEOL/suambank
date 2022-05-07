@@ -5,7 +5,7 @@
 O Suambank é um sistema bancário. Realiza desde as operações básicas de saque, depósito e transferência, até a aquisição de empréstimos.
 Com as transações bancárias registradas, é possível ver o saldo atual e extrato bancário com todas as transações realizadas pela conta.
 
-<strong>Obs:</strong> O sistema SUAMBANK foi criado como projeto final do Projeto Integrador II do curso de Análise e Desenvolvimento de Sistemas da UNISUAM.
+<strong>Obs:</strong> <p style="font-style: italic">O SUAMBANK foi criado como projeto final do Projeto Integrador II do curso de Análise e Desenvolvimento de Sistemas da UNISUAM - Centro Universitário Augusto Motta.</style>
 
 ## Tecnologias
 
