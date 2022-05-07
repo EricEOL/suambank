@@ -51,4 +51,4 @@ Para facilitar o entendimento das rotas, após inicializar sua aplicação, aces
 
 ## Em construção
 
-<input type="checkbox"/> Funcionalidade de empréstimos bancários
+- [ ] Funcionalidade de empréstimos bancários
