@@ -14,6 +14,7 @@ Tecnologias utilizadas nesse projeto:
 * PostgreSQL
 * Lombok
 * JUnit5
+* SpringDoc OpenAPI
 * Maven
 
 ## Rodando o projeto
@@ -28,6 +29,9 @@ Para utilizar o projeto em sua máquina é necessário seguir os seguintes passo
 mvn spring-boot:run
 </pre>
 6) <strong>Agora seu projeto estará rodando e suas rotas podem ser acessadas pelos controllers.</strong> (Obs: Observe os controllers para saber que rotas utilizar)
+
+### Observação sobre as rotas
+Para facilitar o entendimento das rotas, após inicializar sua aplicação, acesse <strong>"/swagger-ui/index.html"</strong>, que será possível visualizar todas as rotas da aplicação, verificar os parâmetros necessários, os schemas das entidades e inclusive enviar dados para o database por lá mesmo.
 
 ## Ordem de criação das entidades
 1) Crie primeiramente um Banco (Bank). | Rota POST para "/bank".
@@ -48,4 +52,3 @@ mvn spring-boot:run
 ## Em construção
 
 * Funcionalidade de empréstimos
-* Funcionalidade de cartão de crédito
