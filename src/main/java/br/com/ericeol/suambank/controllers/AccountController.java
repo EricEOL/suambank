@@ -1,9 +1,7 @@
 package br.com.ericeol.suambank.controllers;
 
-import br.com.ericeol.suambank.entities.Account.Account;
 import br.com.ericeol.suambank.entities.DTO.AccountDTO;
 import br.com.ericeol.suambank.entities.DTO.TransactionDTO;
-import br.com.ericeol.suambank.entities.Transaction;
 import br.com.ericeol.suambank.entities.forms.FormAccount;
 import br.com.ericeol.suambank.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -16,7 +16,7 @@ public class TransactionTest {
 
     @Test
     void shouldBeDepositValueInAccountBalance() {
-        DepositTransactionForm depositTransactionForm = new DepositTransactionForm(1000L, 1299L, 3000d);
+        DepositTransactionForm depositTransactionForm = new DepositTransactionForm(1000L, 548L, 3000d);
         System.out.println(controller.deposit(depositTransactionForm));
     }
 
@@ -28,9 +28,9 @@ public class TransactionTest {
     @Test
     void shouldBeTransferValueFromSenderAccountToDestinationAccountUsingTransfersTypePIX() {
         TransferTransactionForm transferTransactionForm = new TransferTransactionForm(
-                1L,
-                1573L,
-                2043L,
+                2L,
+                1000L,
+                984L,
                 2000d,
                 "PIX"
         );
@@ -41,9 +41,9 @@ public class TransactionTest {
     void shouldBeTransferValueFromSenderAccountToDestinationAccountUsingTransfersTypeTED() {
         TransferTransactionForm transferTransactionForm = new TransferTransactionForm(
                 2L,
-                829L,
-                991L,
-                1000d,
+                1000L,
+                984L,
+                4001d,
                 "TED"
         );
         System.out.println(controller.transfer(transferTransactionForm));

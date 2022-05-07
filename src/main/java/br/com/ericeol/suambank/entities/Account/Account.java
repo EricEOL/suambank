@@ -2,6 +2,7 @@ package br.com.ericeol.suambank.entities.Account;
 
 import br.com.ericeol.suambank.entities.*;
 import br.com.ericeol.suambank.entities.Bank.Bank;
+import br.com.ericeol.suambank.entities.transaction.Transaction;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -71,17 +72,26 @@ public class Account {
     public Boolean transfer(Account destinyAccount, Double value, TransfersType transfersType ) {
         if(this.id == destinyAccount.getId()) throw new RuntimeException("Você não pode transferir valores para a mesma conta que está utilizando");
 
+        TransfersType checkTransferTypeIsCorrect = checkIfTransferValueIsBetweenARangeOfChosenTransferType(transfersType, value);
+        if(checkTransferTypeIsCorrect != transfersType) throw new RuntimeException("Não é possível transferir esse valor utilizando " + transfersType);
+
         double valueWithFee = value;
 
         if(transfersType.equals(TransfersType.TED)) valueWithFee = value + 15d;
         if(transfersType.equals(TransfersType.DOC)) valueWithFee = value + 10d;
 
-        if(valueWithFee > this.balance || value <= 0) throw new RuntimeException("Não é possível realizar uma transferência com esse valor");
+        if(valueWithFee > this.balance || value <= 0) throw new RuntimeException("Essa conta não possui saldo suficiente para uma transferência com esse valor");
 
         this.withdraw(valueWithFee);
         destinyAccount.deposit(value);
 
         return true;
+    }
+
+    private TransfersType checkIfTransferValueIsBetweenARangeOfChosenTransferType(TransfersType transfersType, Double value) {
+        if(value <= 2000d) return TransfersType.PIX;
+        else if(value <= 5.000) return TransfersType.TED;
+        else return TransfersType.DOC;
     }
 
     public String getAccountType() {

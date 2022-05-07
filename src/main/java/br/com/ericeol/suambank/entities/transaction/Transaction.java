@@ -1,4 +1,4 @@
-package br.com.ericeol.suambank.entities;
+package br.com.ericeol.suambank.entities.transaction;
 
 import br.com.ericeol.suambank.entities.Account.Account;
 import lombok.AllArgsConstructor;
@@ -26,14 +26,16 @@ public class Transaction {
     private Long accountNumber;
     private Double value;
     private TransactionsType transactionsType;
+    private TransactionStatus transactionStatus;
     private Timestamp createdAt;
 
-    public Transaction(Account account, Long agencyNumber, Long accountNumber, Double value, TransactionsType transactionsType) {
+    public Transaction(Account account, Long agencyNumber, Long accountNumber, Double value, TransactionsType transactionsType, TransactionStatus transactionStatus) {
         this.account = account;
         this.agencyNumber = agencyNumber;
         this.accountNumber = accountNumber;
         this.value = value;
         this.transactionsType = transactionsType;
+        this.transactionStatus = transactionStatus;
         this.createdAt = Timestamp.from(Instant.now());
     }
 }

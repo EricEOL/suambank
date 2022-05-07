@@ -23,7 +23,7 @@ public class AccountTest {
     @Test
     @Transactional
     void createNewCheckingAccount() {
-        accountController.newCheckingAccount(new FormAccount(3L));
+        accountController.newCheckingAccount(new FormAccount(2L));
     }
 
     @Test

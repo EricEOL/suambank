@@ -7,7 +7,7 @@ import br.com.ericeol.suambank.entities.Bank.Bank;
 import br.com.ericeol.suambank.entities.Client;
 import br.com.ericeol.suambank.entities.DTO.AccountDTO;
 import br.com.ericeol.suambank.entities.DTO.TransactionDTO;
-import br.com.ericeol.suambank.entities.Transaction;
+import br.com.ericeol.suambank.entities.transaction.Transaction;
 import br.com.ericeol.suambank.entities.forms.FormAccount;
 import br.com.ericeol.suambank.repositories.AccountRepository;
 import br.com.ericeol.suambank.repositories.BankRepository;

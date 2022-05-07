@@ -44,41 +44,6 @@ public class Bank {
         this.name = name;
     }
 
-    /*
-    public Account newCheckingAccount(Client client) {
-        for (Account account : accounts) {
-            if (account.getClient().getCpf() == client.getCpf() && account.getAccountType() == AccountType.CHECKING.toString()) {
-                throw new RuntimeException("Não é possível criar duas contas correntes para o mesmo cliente");
-            }
-        }
-
-        Account account = new Account(this, client, AccountType.CHECKING);
-
-        client.addAccount(account);
-
-        accounts.add(account);
-
-        return account;
-    }
-
-    public Account newSavingsAccount(Client client) {
-
-        for (Account account : accounts) {
-            if (account.getClient().getCpf() == client.getCpf() && account.getAccountType() == AccountType.SAVINGS.toString()) {
-                throw new RuntimeException("Não é possível criar duas contas poupança para o mesmo cliente");
-            }
-        }
-
-        Account account = new Account(this, client, AccountType.SAVINGS);
-
-        client.addAccount(account);
-
-        accounts.add(account);
-
-        return account;
-    }
-    */
-
     public Loan takeOutLoan(Account requestedAccount, Double requestedValue, int installments) {
         if (requestedValue > 30000d) throw new RuntimeException("Value solicitado excede o permitido");
 
@@ -91,6 +56,10 @@ public class Bank {
         this.loans.add(loan);
 
         return loan;
+    }
+
+    public void verifyLoan(Loan loan) {
+        if (loan.getInstallmentsPaid() == loan.getInstallments()) loans.remove(loan);
     }
 
     public String getCod() {
@@ -123,9 +92,6 @@ public class Bank {
         return loans;
     }
 
-    public void verifyLoan(Loan loan) {
-        if (loan.getInstallmentsPaid() == loan.getInstallments()) loans.remove(loan);
-    }
 
     @Override
     public String toString() {
