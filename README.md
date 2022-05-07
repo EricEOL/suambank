@@ -1,4 +1,6 @@
-# *SUAMBANK*
+<p align="center">
+  <img src="https://raw.githubusercontent.com/EricEOL/suambank/main/readme/suambank.png" />
+</p>
 
 O Suambank é um sistema bancário. Realiza desde as operações básicas de saque, depósito e transferência, até a aquisição de empréstimos.
 Com as transações bancárias registradas, é possível ver o saldo atual e extrato bancário com todas as transações realizadas pela conta.
