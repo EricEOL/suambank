@@ -50,7 +50,7 @@ public class AccountService {
             Long agencyNumber = GenerateAgencyNumber.generate(repository);
             Long accountNumber = Math.round((repository.count() + 2) * Math.random() * 1007);
 
-            Account account = new Account(bank, client , AccountType.CHECKING.toString(), agencyNumber, accountNumber);
+            Account account = new Account(bank, client , AccountType.CHECKING, agencyNumber, accountNumber);
             repository.save(account);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -72,7 +72,7 @@ public class AccountService {
             Long agencyNumber = GenerateAgencyNumber.generate(repository);
             Long accountNumber = Math.round((repository.count() + 2) * Math.random() * 1003);
 
-            Account account = new Account(bank, client , AccountType.SAVINGS.toString(), agencyNumber, accountNumber);
+            Account account = new Account(bank, client , AccountType.SAVINGS, agencyNumber, accountNumber);
             repository.save(account);
         } catch (Exception e) {
             throw new RuntimeException(e);

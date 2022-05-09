@@ -13,7 +13,7 @@ public class LoanForm {
     private Long accountId;
 
     @NotNull
-    private Double initialValue;
+    private Double value;
 
     @NotNull
     private int installments;

@@ -2,6 +2,7 @@ package br.com.ericeol.suambank.entities.DTO;
 
 
 import br.com.ericeol.suambank.entities.Account.Account;
+import br.com.ericeol.suambank.entities.Account.AccountType;
 import lombok.Data;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class AccountDTO {
     private Long id;
     private Long agencyNumber;
     private Long accountNumber;
-    private String accountType;
+    private AccountType accountType;
 
     public AccountDTO(Account account) {
         this.id = account.getId();

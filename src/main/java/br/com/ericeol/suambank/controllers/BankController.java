@@ -7,6 +7,7 @@ import br.com.ericeol.suambank.services.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,8 +28,8 @@ public class BankController {
     }
 
     @PostMapping("/loan")
-    public void newLoan(@RequestBody LoanForm loanForm) {
-
+    public void newLoan(@RequestBody @Valid LoanForm loanForm) {
+        service.newLoan(loanForm);
     }
 
 }

@@ -52,7 +52,7 @@ public class Client implements UserDetails {
     public Boolean clientAlreadyHasCheckingAccount() {
         List<Account> result = this.accounts
                 .stream()
-                .filter(account -> account.getAccountType().length() == AccountType.CHECKING.toString().length())
+                .filter(account -> account.getAccountType() == AccountType.CHECKING)
                 .collect(Collectors.toList());
 
         return result.size() >= 1;
@@ -61,7 +61,7 @@ public class Client implements UserDetails {
     public Boolean clientAlreadyHasSavingsAccount() {
         List<Account> result = this.accounts
                 .stream()
-                .filter(account -> account.getAccountType().length() == AccountType.SAVINGS.toString().length())
+                .filter(account -> account.getAccountType() == AccountType.SAVINGS)
                 .collect(Collectors.toList());
 
         return result.size() >= 1;

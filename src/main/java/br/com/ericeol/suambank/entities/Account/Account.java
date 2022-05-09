@@ -35,7 +35,7 @@ public class Account {
     @Column(nullable = false, unique = true)
     private Long accountNumber;
 
-    private String accountType;
+    private AccountType accountType;
 
     @ManyToOne
     private Client client;
@@ -47,7 +47,7 @@ public class Account {
     @JsonIgnore
     private List<Loan> loans = new ArrayList<>();
 
-    public Account(Bank bank, Client client, String accountType, Long agencyNumber, Long accountNumber) {
+    public Account(Bank bank, Client client, AccountType accountType, Long agencyNumber, Long accountNumber) {
         this.bank = bank;
         this.client = client;
         this.accountType = accountType;
@@ -92,33 +92,5 @@ public class Account {
         if(value <= 2000d) return TransfersType.PIX;
         else if(value <= 5.000) return TransfersType.TED;
         else return TransfersType.DOC;
-    }
-
-    public String getAccountType() {
-        return this.accountType;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Bank getBank() {
-        return bank;
-    }
-
-    public Double getBalance() {
-        return balance;
-    }
-
-    public Long getAgencyNumber() {
-        return agencyNumber;
-    }
-
-    public Long getAccountNumber() {
-        return accountNumber;
-    }
-
-    public Client getClient() {
-        return client;
     }
 }

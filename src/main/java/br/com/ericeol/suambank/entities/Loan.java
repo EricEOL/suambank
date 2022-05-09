@@ -87,32 +87,12 @@ public class Loan {
         return 1.14;
     }
 
-    public Double getInitialValue() {
-        return initialValue;
-    }
-
-    public Double getCurrentValue() {
-        return currentValue;
-    }
-
-    public Double getValueInstallments() {
-        return valueInstallments;
-    }
-
     public int getInstallments() {
         return installments;
     }
 
     public int getInstallmentsPaid() {
         return installmentsPaid;
-    }
-
-    public GregorianCalendar getNextPaymentDate() {
-        return nextPaymentDate;
-    }
-
-    public void setNextPaymentDate(GregorianCalendar paymentDate) {
-        this.nextPaymentDate = paymentDate;
     }
 
     @Override

@@ -49,11 +49,16 @@ public class Bank {
         if (!accounts.contains(requestedAccount))
             throw new RuntimeException("O empréstimo só é realizado para contas relacionadas ao banco, contas de outros bancos não são permitidas");
 
-        if(requestedAccount.getAccountType() != AccountType.CHECKING.toString())
+        if(requestedAccount.getAccountType() != AccountType.CHECKING) {
+            System.out.println(requestedAccount.getAccountType());
             throw new RuntimeException("Empréstimo só é permitido para contas correntes. Não é possível realizar isso em uma conta poupança");
+        }
 
         if (requestedValue > 30000d)
             throw new RuntimeException("Value solicitado excede o permitido");
+
+        if(installments > 24)
+            throw new RuntimeException("O número máximo de parcelamento de um empréstimo é de 24 meses");
 
         Loan loan = new Loan(requestedAccount, requestedValue, installments);
         requestedAccount.deposit(requestedValue);
