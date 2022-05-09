@@ -1,6 +1,7 @@
 package br.com.ericeol.suambank.entities.Bank;
 
 import br.com.ericeol.suambank.entities.Account.Account;
+import br.com.ericeol.suambank.entities.Account.AccountType;
 import br.com.ericeol.suambank.entities.Loan;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -45,10 +46,14 @@ public class Bank {
     }
 
     public Loan takeOutLoan(Account requestedAccount, Double requestedValue, int installments) {
-        if (requestedValue > 30000d) throw new RuntimeException("Value solicitado excede o permitido");
-
         if (!accounts.contains(requestedAccount))
             throw new RuntimeException("O empréstimo só é realizado para contas relacionadas ao banco, contas de outros bancos não são permitidas");
+
+        if(requestedAccount.getAccountType() != AccountType.CHECKING.toString())
+            throw new RuntimeException("Empréstimo só é permitido para contas correntes. Não é possível realizar isso em uma conta poupança");
+
+        if (requestedValue > 30000d)
+            throw new RuntimeException("Value solicitado excede o permitido");
 
         Loan loan = new Loan(requestedAccount, requestedValue, installments);
         requestedAccount.deposit(requestedValue);
