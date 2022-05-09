@@ -11,6 +11,7 @@ import br.com.ericeol.suambank.entities.forms.TransferTransactionForm;
 import br.com.ericeol.suambank.repositories.AccountRepository;
 import br.com.ericeol.suambank.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,6 +78,12 @@ public class TransactionService {
     public TransactionDTO transfer(TransferTransactionForm transferTransactionForm) {
         try {
             Account senderAccount = repository.getById(transferTransactionForm.getAccountId());
+
+            Boolean passwordMatches = new BCryptPasswordEncoder().matches(transferTransactionForm.getPassword(),senderAccount.getClient().getPassword());
+
+            if(!passwordMatches)
+                throw new RuntimeException("Essa senha não confere");
+
             Account destinationAccount = repository.findByAgencyAndAccountNumber(transferTransactionForm.getDestinationAgencyNumber(), transferTransactionForm.getDestinationAccountNumber());
 
             senderAccount.transfer(destinationAccount, transferTransactionForm.getValue(), TransfersType.valueOf(transferTransactionForm.getTransfersType()));

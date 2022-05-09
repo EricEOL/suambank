@@ -43,7 +43,7 @@ Para facilitar o entendimento das rotas, após inicializar sua aplicação, aces
 
 ## Funcionalidades principais
 
-* Saque: 
+* Saque
 * Depósito
 * Transferência
     * PIX

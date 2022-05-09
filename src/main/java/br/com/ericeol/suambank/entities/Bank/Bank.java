@@ -72,18 +72,6 @@ public class Bank {
         if (loan.getInstallmentsPaid() == loan.getInstallments()) loans.remove(loan);
     }
 
-    public String getCod() {
-        return cod;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Double getBankBalance() {
-        return bankBalance;
-    }
-
     public void setBankBalance(Double bankBalance) {
         this.bankBalance = bankBalance;
     }
@@ -93,15 +81,6 @@ public class Bank {
         for(Account account: accounts) accountsBalance += account.getBalance();
         return accountsBalance;
     }
-
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public List<Loan> getLoans() {
-        return loans;
-    }
-
 
     @Override
     public String toString() {

@@ -14,4 +14,5 @@ public class TransferTransactionForm {
     private Long destinationAccountNumber;
     private Double value;
     private String transfersType;
+    private String password;
 }

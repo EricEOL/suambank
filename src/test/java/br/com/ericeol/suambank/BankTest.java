@@ -20,9 +20,9 @@ public class BankTest {
     }
 
     @Test
-    void shouldBeCreatedANewBank() {
+    void shouldNotBePossibleCreateMoreThan1Bank() {
         FormBank formBank = new FormBank("001", "Suambank");
-        bankController.newBank(formBank);
+        Assertions.assertThrows(CreateNewBankException.class, () -> bankController.newBank(formBank));
     }
 
     @Test

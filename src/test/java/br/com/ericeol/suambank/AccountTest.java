@@ -51,7 +51,7 @@ public class AccountTest {
     @Test
     @Transactional
     void shouldBeReturnAccountStatement() {
-        System.out.println(accountController.statementByMonth(2L, 4, 2022));
+        System.out.println(accountController.statementByMonth(4L, 4, 2022));
     }
 
 }
