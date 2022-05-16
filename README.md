@@ -55,7 +55,7 @@ Para facilitar o entendimento das rotas, após inicializar sua aplicação, aces
 As interfaces estão em desenvolvimento, a imagem abaixo é uma ilustração criada no Figma.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/EricEOL/suambank/main/readme/screens_suambank.png" />
+  <img src="https://raw.githubusercontent.com/EricEOL/suambank/main/readme/screenssuambank.png" />
 </p>
 
 ## Em construção
