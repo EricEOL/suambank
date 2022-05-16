@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/EricEOL/suambank/main/readme/suambank.png" />
 </p>
 
-O Suambank é um sistema bancário. Realiza desde as operações básicas de saque, depósito e transferência, até a aquisição de empréstimos.
+O Suambank é um sistema bancário que realiza desde as operações básicas de saque, depósito e transferência, até a aquisição de empréstimos.
 Com as transações bancárias registradas, é possível ver o saldo atual e extrato bancário com todas as transações realizadas pela conta.
 
 *<strong>Obs:</strong> O SUAMBANK foi criado como projeto final do Projeto Integrador II do curso de Análise e Desenvolvimento de Sistemas da UNISUAM - Centro Universitário Augusto Motta.*
@@ -51,6 +51,14 @@ Para facilitar o entendimento das rotas, após inicializar sua aplicação, aces
     * TED
 * Empréstimos
 
+## Interfaces
+As interfaces estão em desenvolvimento, a imagem abaixo é uma ilustração criada no Figma.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/EricEOL/suambank/main/readme/screens_suambank.png" />
+</p>
+
 ## Em construção
 
 - [ ] Funcionalidade de empréstimos bancários
+- [ ] Front-end
