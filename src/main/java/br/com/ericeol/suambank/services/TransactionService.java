@@ -10,6 +10,7 @@ import br.com.ericeol.suambank.entities.forms.DepositTransactionForm;
 import br.com.ericeol.suambank.entities.forms.TransferTransactionForm;
 import br.com.ericeol.suambank.repositories.AccountRepository;
 import br.com.ericeol.suambank.repositories.TransactionRepository;
+import br.com.ericeol.suambank.utils.RealFormatNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -119,15 +120,11 @@ public class TransactionService {
 
             transactionRepository.saveAll(transactions);
 
-            Locale br = new Locale("pt", "BR");
-            Currency real = Currency.getInstance(br);
-            NumberFormat realFormat = NumberFormat.getCurrencyInstance(br);
-
             try {
                 emailService.sendEmail(
                         senderAccount.getClient().getEmail(),
                         destinationAccount.getClient().getEmail(),
-                        "Transação no valor de " + realFormat.format(transferTransactionForm.getValue()) + " efetuada com sucesso.");
+                        "Transação no valor de " + RealFormatNumber.format(transferTransactionForm.getValue()) + " efetuada com sucesso.");
             } catch (Exception e) {
                 System.out.println(e);
             }
