@@ -15,7 +15,7 @@ public class EmailService {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom("quillbolteol333@hotmail.com");
         msg.setTo(senderAccountEmail, destinationAccountEmail);
-        msg.setSubject("Transação realizada");
+        msg.setSubject("SUAMBANK - Transação realizada em sua conta");
         msg.setText(textMessage);
 
         javaMailSender.send(msg);
