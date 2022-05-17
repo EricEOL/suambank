@@ -16,8 +16,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class TransactionService {
@@ -116,11 +119,15 @@ public class TransactionService {
 
             transactionRepository.saveAll(transactions);
 
+            Locale br = new Locale("pt", "BR");
+            Currency real = Currency.getInstance(br);
+            NumberFormat realFormat = NumberFormat.getCurrencyInstance(br);
+
             try {
                 emailService.sendEmail(
                         senderAccount.getClient().getEmail(),
                         destinationAccount.getClient().getEmail(),
-                        "Transação no valor de " + transferTransactionForm.getValue() + " efetuada com sucesso.");
+                        "Transação no valor de " + realFormat.format(transferTransactionForm.getValue()) + " efetuada com sucesso.");
             } catch (Exception e) {
                 System.out.println(e);
             }
