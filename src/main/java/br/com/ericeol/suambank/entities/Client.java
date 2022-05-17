@@ -32,6 +32,8 @@ public class Client implements UserDetails {
     @Column(unique = true)
     private String cpf;
 
+    private String email;
+
     private String password;
 
     private String name;

@@ -19,7 +19,7 @@ public class ClientTest {
 
     @Test
     void createNewClient() {
-        FormClient formClient = new FormClient("222.222.222-02", "Pipoca", "pipoquinhaGordinho");
+        FormClient formClient = new FormClient("222.222.222-02", "Pipoca", "pipoca", "pipoquinhaGordinho");
         clientController.newClient(formClient);
     }
 

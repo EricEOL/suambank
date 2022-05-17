@@ -20,4 +20,7 @@ public class FormClient {
 
     @NotBlank(message = "campo PASSWORD é obrigatório")
     private String password;
+
+    @NotBlank(message = "campo PASSWORD é obrigatório")
+    private String email;
 }

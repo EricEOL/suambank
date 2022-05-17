@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,9 @@ public class TransactionService {
 
     @Autowired
     TransactionRepository transactionRepository;
+
+    @Autowired
+    EmailService emailService;
 
     @Transactional
     public TransactionDTO deposit(DepositTransactionForm depositTransactionForm) {
@@ -111,6 +115,15 @@ public class TransactionService {
             transactions.add(transactionReceived);
 
             transactionRepository.saveAll(transactions);
+
+            try {
+                emailService.sendEmail(
+                        senderAccount.getClient().getEmail(),
+                        destinationAccount.getClient().getEmail(),
+                        "Transação no valor de " + transferTransactionForm.getValue() + " efetuada com sucesso.");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
 
             return new TransactionDTO(transactionSending);
 
