@@ -17,6 +17,7 @@ Tecnologias utilizadas nesse projeto:
 * Lombok
 * JUnit5
 * SpringDoc OpenAPI
+* Java Mail
 * Maven
 
 ## Rodando o projeto
@@ -26,11 +27,15 @@ Para utilizar o projeto em sua máquina é necessário seguir os seguintes passo
 2) Clonar este repositório.
 3) Ter o PostgreSQL instalado. (Obs: atentar-se para a porta utilizada pelo seu PostgreSQL - o projeto está direcionando para a porta 5433, que não é a porta padrão de instalação. Se a porta utilizada for outra, faça a alteração no arquivo application.properties em spring.datasource.url)
 4) Dentro do PostgreSQL é necessário criar o database <strong>suambank</strong>.
-5) Entrar na pasta do projeto pelo terminal e executar o seguinte comando:
+5) Preste atenção nesse ponto, foi adicionada a funcionalidade de envio de email de notificação ao realizar uma transação do tipo transferência. Por conta disso, o aquivo application.properties não foi adicionado a esse projeto, no lugar dele foi colocado um application-dev.properties. Faça os seguintes passos:
+   1) Renomeie o arquivo para application.properties
+   2) Na propriedade spring.mail.username deve ser adicionado um email do outlook
+   3) Na propriedade spring.mail.password deve ser adicionado a senha do email
+6) Entrar na pasta do projeto pelo terminal e executar o seguinte comando:
 <pre>
 mvn spring-boot:run
 </pre>
-6) <strong>Agora seu projeto estará rodando e suas rotas podem ser acessadas pelos controllers.</strong> (Obs: Observe os controllers para saber que rotas utilizar)
+7) <strong>Agora seu projeto estará rodando e suas rotas podem ser acessadas pelos controllers.</strong> (Obs: Observe os controllers para saber que rotas utilizar)
 
 ### Observação sobre as rotas
 Para facilitar o entendimento das rotas, após inicializar sua aplicação, acesse <strong>"/swagger-ui/index.html"</strong>, que será possível visualizar todas as rotas da aplicação, verificar os parâmetros necessários, os schemas das entidades e inclusive enviar dados para o database por lá mesmo.

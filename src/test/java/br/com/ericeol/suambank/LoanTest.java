@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 import java.util.List;
+/*
 
 @SpringBootTest
 public class LoanTest {
@@ -38,3 +39,5 @@ public class LoanTest {
         Assertions.assertThrows(RuntimeException.class, () -> bank.takeOutLoan(account, 30000d, 25));
     }
 }
+
+ */

@@ -7,14 +7,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
+/*
 @SpringBootTest
 public class TransactionTest {
 
     @Autowired
     TransactionController controller;
 
-    /*
     @Test
     void shouldBeDepositValueInAccountBalance() {
         DepositTransactionForm depositTransactionForm = new DepositTransactionForm(1000L, 548L, 3000d);
@@ -72,6 +71,7 @@ public class TransactionTest {
                 "PIX"
         );
         Assertions.assertThrows(RuntimeException.class, () -> controller.transfer(transferTransactionForm));
-    } */
+    }
 
 }
+*/
