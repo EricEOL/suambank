@@ -121,10 +121,14 @@ public class TransactionService {
             transactionRepository.saveAll(transactions);
 
             try {
-                emailService.sendEmail(
+                emailService.sendHTMLEmail(
                         senderAccount.getClient().getEmail(),
                         destinationAccount.getClient().getEmail(),
-                        "Transação no valor de " + RealFormatNumber.format(transferTransactionForm.getValue()) + " efetuada com sucesso.");
+                        RealFormatNumber.format(transferTransactionForm.getValue()));
+                /* emailService.sendEmail(
+                        senderAccount.getClient().getEmail(),
+                        destinationAccount.getClient().getEmail(),
+                        "Transação no valor de " + RealFormatNumber.format(transferTransactionForm.getValue()) + " efetuada com sucesso."); */
             } catch (Exception e) {
                 System.out.println(e);
             }
