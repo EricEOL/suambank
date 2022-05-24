@@ -2,6 +2,7 @@ package br.com.ericeol.suambank.services;
 
 import br.com.ericeol.suambank.entities.Account.Account;
 import br.com.ericeol.suambank.entities.DTO.TransactionDTO;
+import br.com.ericeol.suambank.entities.forms.WithdrawTransactionForm;
 import br.com.ericeol.suambank.entities.transaction.Transaction;
 import br.com.ericeol.suambank.entities.transaction.TransactionStatus;
 import br.com.ericeol.suambank.entities.transaction.TransactionsType;
@@ -50,6 +51,16 @@ public class TransactionService {
                     TransactionStatus.RECEBIDO
             );
 
+            try {
+                emailService.sendHTMLEmail(
+                        account.getClient().getEmail(),
+                        account.getClient().getEmail(),
+                        RealFormatNumber.format(depositTransactionForm.getValue()),
+                        "Depósito");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
             transactionRepository.save(transaction);
 
             return new TransactionDTO(transaction);
@@ -60,19 +71,29 @@ public class TransactionService {
     }
 
     @Transactional
-    public TransactionDTO withdraw(Long accountId, Double value) {
+    public TransactionDTO withdraw(WithdrawTransactionForm withdrawTransactionForm) {
         try {
-            Account account = repository.findById(accountId).get();
-            account.withdraw(value);
+            Account account = repository.findById(withdrawTransactionForm.getAccountId()).get();
+            account.withdraw(withdrawTransactionForm.getValue());
 
             Transaction transaction = new Transaction(
                     account,
                     account.getAgencyNumber(),
                     account.getAccountNumber(),
-                    value,
+                    withdrawTransactionForm.getValue(),
                     TransactionsType.WITHDRAW,
                     TransactionStatus.RETIRADO
             );
+
+            try {
+                emailService.sendHTMLEmail(
+                        account.getClient().getEmail(),
+                        account.getClient().getEmail(),
+                        RealFormatNumber.format(withdrawTransactionForm.getValue()),
+                        "Saque");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
 
             transactionRepository.save(transaction);
 
@@ -124,11 +145,8 @@ public class TransactionService {
                 emailService.sendHTMLEmail(
                         senderAccount.getClient().getEmail(),
                         destinationAccount.getClient().getEmail(),
-                        RealFormatNumber.format(transferTransactionForm.getValue()));
-                /* emailService.sendEmail(
-                        senderAccount.getClient().getEmail(),
-                        destinationAccount.getClient().getEmail(),
-                        "Transação no valor de " + RealFormatNumber.format(transferTransactionForm.getValue()) + " efetuada com sucesso."); */
+                        RealFormatNumber.format(transferTransactionForm.getValue()),
+                        "Transferência");
             } catch (Exception e) {
                 System.out.println(e);
             }

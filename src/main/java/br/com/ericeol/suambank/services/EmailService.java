@@ -26,7 +26,7 @@ public class EmailService {
         javaMailSender.send(msg);
     }
 
-    void sendHTMLEmail(String senderAccountEmail, String destinationAccountEmail, String value) throws MessagingException {
+    void sendHTMLEmail(String senderAccountEmail, String destinationAccountEmail, String value, String transaction) throws MessagingException {
         String[] emailsTo = {senderAccountEmail, destinationAccountEmail};
         MimeMessage mail = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mail);
@@ -39,7 +39,7 @@ public class EmailService {
                         "<img src=\"https://raw.githubusercontent.com/EricEOL/suambank/main/readme/suambank.png\" alt=\"\" srcset=\"\">\n" +
                         "</p>" +
                         "<h2 align=\"center\" style=\"color:#1995a7\">Transação realizada</h2>" +
-                        "<h3 align=\"center\">Valor de " + value + "</h3>" +
+                        "<h3 align=\"center\">" + transaction + " no valor de " + value + "</h3>" +
                         "<p align=\"center\">Conte sempre com o SUAMBANK</p>" +
                         "</div>",
                 true);

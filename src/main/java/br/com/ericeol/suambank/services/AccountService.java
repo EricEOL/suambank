@@ -14,6 +14,7 @@ import br.com.ericeol.suambank.repositories.BankRepository;
 import br.com.ericeol.suambank.repositories.ClientRepository;
 import br.com.ericeol.suambank.utils.GenerateAgencyNumber;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -79,7 +80,7 @@ public class AccountService {
         }
     }
 
-    public List<TransactionDTO> statement(Long accountId, int month, int year) {
+    public ResponseEntity<List<TransactionDTO>> statement(Long accountId, int month, int year) {
         Optional<Account> account = repository.findById(accountId);
 
         if(account.isEmpty()) {
@@ -93,6 +94,6 @@ public class AccountService {
             return transactionMonth == month && transactionYear == year;
         }).collect(Collectors.toList());
 
-        return TransactionDTO.convert(transactions);
+        return ResponseEntity.ok(TransactionDTO.convert(transactions));
     }
 }

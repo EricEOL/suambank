@@ -5,6 +5,7 @@ import br.com.ericeol.suambank.entities.DTO.TransactionDTO;
 import br.com.ericeol.suambank.entities.forms.FormAccount;
 import br.com.ericeol.suambank.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class AccountController {
     }
 
     @GetMapping("/statement/{accountId}")
-    public List<TransactionDTO> statementByMonth(
+    public ResponseEntity<List<TransactionDTO>> statementByMonth(
             @PathVariable Long accountId,
             @RequestParam int month,
             @RequestParam int year) {
